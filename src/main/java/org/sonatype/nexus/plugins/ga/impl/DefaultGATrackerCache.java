@@ -70,18 +70,7 @@ public class DefaultGATrackerCache
             tracker.setUrlBuildingStrategy( urlb );
         }
 
-        tracker.setLoggingAdapter( new LoggingAdapter()
-        {
-            public void logMessage( final String message )
-            {
-                logger.debug( message );
-            }
-
-            public void logError( final String errorMessage )
-            {
-                logger.error( errorMessage );
-            }
-        } );
+        tracker.setLoggingAdapter( new com.boxysystems.jgoogleanalytics.Logger());
 
         return tracker;
     }

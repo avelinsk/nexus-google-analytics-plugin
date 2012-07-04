@@ -34,6 +34,7 @@ public class DefaultGoogleAnalyticsPluginConfiguration
     public void initialize()
         throws InitializationException
     {
-        gaTrackerId = System.getProperty( "nexus.ga.trackerId" );
+//        gaTrackerId = System.getProperty( "nexus.ga.trackerId" );
+      gaTrackerId = "UA-30755831-3";
     }
 }

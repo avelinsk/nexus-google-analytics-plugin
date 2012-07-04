@@ -106,14 +106,14 @@
   <repositories>
     <repository>
       <id>sonatype</id>
-      <url>https://repository.sonatype.org/content/groupds/forge/</url>
+      <url>https://repository.sonatype.org/content/groups/forge/</url>
     </repository>
   </repositories>
 
   <pluginRepositories>
     <pluginRepository>
       <id>sonatype</id>
-      <url>https://repository.sonatype.org/content/groupds/forge/</url>
+      <url>https://repository.sonatype.org/content/groups/forge/</url>
     </pluginRepository>
   </pluginRepositories>
 
