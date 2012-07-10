@@ -2,6 +2,7 @@ package org.sonatype.nexus.plugins.ga.impl;
 
 import java.util.HashMap;
 
+import com.boxysystems.jgoogleanalytics.Slf4jLogger;
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
@@ -13,65 +14,59 @@ import org.sonatype.nexus.plugins.ga.NexusFPoint;
 
 import com.boxysystems.jgoogleanalytics.GoogleAnalytics_v1_URLBuildingStrategy;
 import com.boxysystems.jgoogleanalytics.JGoogleAnalyticsTracker;
-import com.boxysystems.jgoogleanalytics.LoggingAdapter;
 
-@Component( role = GATrackerCache.class )
+@Component(role = GATrackerCache.class)
 public class DefaultGATrackerCache
-    implements GATrackerCache
-{
-    @Requirement
-    private Logger logger;
+        implements GATrackerCache {
+  @Requirement
+  private Logger logger;
 
-    @Requirement
-    private ApplicationStatusSource applicationStatusSource;
+  @Requirement
+  private ApplicationStatusSource applicationStatusSource;
 
-    @Requirement
-    private GlobalRestApiSettings globalRestApiSettings;
+  @Requirement
+  private GlobalRestApiSettings globalRestApiSettings;
 
-    private final HashMap<String, JGoogleAnalyticsTracker> jgaMap = new HashMap<String, JGoogleAnalyticsTracker>();
+  private final HashMap<String, JGoogleAnalyticsTracker> jgaMap = new HashMap<String, JGoogleAnalyticsTracker>();
 
-    public synchronized JGoogleAnalyticsTracker getGATracker( NexusFPoint nexusFPoint )
-    {
-        JGoogleAnalyticsTracker tracker = jgaMap.get( nexusFPoint.getTrackerId() );
+  public synchronized JGoogleAnalyticsTracker getGATracker(NexusFPoint nexusFPoint) {
+    JGoogleAnalyticsTracker tracker = jgaMap.get(nexusFPoint.getTrackerId());
 
-        if ( tracker == null )
-        {
-            tracker = createJGoogleAnalyticsTracker( nexusFPoint );
+    if (tracker == null) {
+      tracker = createJGoogleAnalyticsTracker(nexusFPoint);
 
-            jgaMap.put( nexusFPoint.getTrackerId(), tracker );
-        }
-
-        return tracker;
+      jgaMap.put(nexusFPoint.getTrackerId(), tracker);
     }
 
-    // ==
+    return tracker;
+  }
 
-    protected JGoogleAnalyticsTracker createJGoogleAnalyticsTracker( NexusFPoint fp )
-    {
-        JGoogleAnalyticsTracker tracker;
+  // ==
 
-        tracker =
-            new JGoogleAnalyticsTracker( applicationStatusSource.getSystemStatus().getAppName(),
-                applicationStatusSource.getSystemStatus().getVersion(), fp.getTrackerId() );
+  protected JGoogleAnalyticsTracker createJGoogleAnalyticsTracker(NexusFPoint fp) {
+    JGoogleAnalyticsTracker tracker;
 
-        if ( globalRestApiSettings.isEnabled() && globalRestApiSettings.isForceBaseUrl()
-            && StringUtils.isNotEmpty( globalRestApiSettings.getBaseUrl() ) )
-        {
-            // we do it kinda awkward, but this what API gives us
-            // tracker.getStrategy() would be nicer ;)
-            // or a constructor taking one
-            GoogleAnalytics_v1_URLBuildingStrategy urlb =
-                new GoogleAnalytics_v1_URLBuildingStrategy( applicationStatusSource.getSystemStatus().getAppName(),
-                    applicationStatusSource.getSystemStatus().getVersion(), fp.getTrackerId() );
+    tracker =
+            new JGoogleAnalyticsTracker(applicationStatusSource.getSystemStatus().getAppName(),
+                    applicationStatusSource.getSystemStatus().getVersion(), fp.getTrackerId());
 
-            // set new referer
-            urlb.setRefererURL( globalRestApiSettings.getBaseUrl() );
+    if (globalRestApiSettings.isEnabled() && globalRestApiSettings.isForceBaseUrl()
+            && StringUtils.isNotEmpty(globalRestApiSettings.getBaseUrl())) {
+      // we do it kinda awkward, but this what API gives us
+      // tracker.getStrategy() would be nicer ;)
+      // or a constructor taking one
+      GoogleAnalytics_v1_URLBuildingStrategy urlb =
+              new GoogleAnalytics_v1_URLBuildingStrategy(applicationStatusSource.getSystemStatus().getAppName(),
+                      applicationStatusSource.getSystemStatus().getVersion(), fp.getTrackerId());
 
-            tracker.setUrlBuildingStrategy( urlb );
-        }
+      // set new referer
+      urlb.setRefererURL(globalRestApiSettings.getBaseUrl());
 
-        tracker.setLoggingAdapter( new com.boxysystems.jgoogleanalytics.Logger());
-
-        return tracker;
+      tracker.setUrlBuildingStrategy(urlb);
     }
+
+    tracker.setLoggingAdapter(new Slf4jLogger());
+
+    return tracker;
+  }
 }

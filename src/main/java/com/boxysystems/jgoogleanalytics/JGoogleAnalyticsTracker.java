@@ -38,7 +38,7 @@ public class JGoogleAnalyticsTracker {
 
 
   /**
-   * Setter injection for URLBuildingStrategy incase if you want to use a different url building logic.
+   * Setter injection for URLBuildingStrategy in case if you want to use a different url building logic.
    *
    * @param urlBuildingStrategy implemented instance of URLBuildingStrategy
    */
