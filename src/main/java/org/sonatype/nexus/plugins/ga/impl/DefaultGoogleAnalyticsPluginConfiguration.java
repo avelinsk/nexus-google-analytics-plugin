@@ -7,7 +7,7 @@ import org.sonatype.nexus.plugins.ga.GoogleAnalyticsPluginConfiguration;
 
 /**
  * TODO: this is just for quick usability, later this will be expanded!
- * 
+ *
  * @author cstamas
  */
 @Component( role = GoogleAnalyticsPluginConfiguration.class )
@@ -35,6 +35,5 @@ public class DefaultGoogleAnalyticsPluginConfiguration
         throws InitializationException
     {
       gaTrackerId = System.getProperty( "nexus.ga.trackerId" );
-      //gaTrackerId = "UA-30755831-3";
     }
 }
