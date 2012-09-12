@@ -1,25 +1,28 @@
 package org.sonatype.nexus.plugins.ga.impl;
 
-import java.util.HashMap;
-
-import com.boxysystems.jgoogleanalytics.Slf4jLogger;
+import com.boxysystems.jgoogleanalytics.GoogleAnalytics_v1_URLBuildingStrategy;
+import com.boxysystems.jgoogleanalytics.JGoogleAnalyticsTracker;
+import com.boxysystems.jgoogleanalytics.LoggingAdapter;
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.StringUtils;
+import org.slf4j.LoggerFactory;
 import org.sonatype.nexus.ApplicationStatusSource;
 import org.sonatype.nexus.configuration.application.GlobalRestApiSettings;
 import org.sonatype.nexus.plugins.ga.GATrackerCache;
 import org.sonatype.nexus.plugins.ga.NexusFPoint;
 
-import com.boxysystems.jgoogleanalytics.GoogleAnalytics_v1_URLBuildingStrategy;
-import com.boxysystems.jgoogleanalytics.JGoogleAnalyticsTracker;
+import java.util.HashMap;
 
 @Component(role = GATrackerCache.class)
 public class DefaultGATrackerCache
         implements GATrackerCache {
+
   @Requirement
   private Logger logger;
+
+  private final org.slf4j.Logger log = LoggerFactory.getLogger(getClass());
 
   @Requirement
   private ApplicationStatusSource applicationStatusSource;
@@ -65,7 +68,16 @@ public class DefaultGATrackerCache
       tracker.setUrlBuildingStrategy(urlb);
     }
 
-    tracker.setLoggingAdapter(new Slf4jLogger());
+    tracker.setLoggingAdapter(new LoggingAdapter() {
+
+      public void logMessage(String msg) {
+        log.debug(msg);
+      }
+
+      public void logError(String msg) {
+        log.error(msg);
+      }
+    });
 
     return tracker;
   }
