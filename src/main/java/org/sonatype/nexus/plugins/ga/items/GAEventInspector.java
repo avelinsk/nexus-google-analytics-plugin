@@ -1,7 +1,6 @@
 package org.sonatype.nexus.plugins.ga.items;
 
-import java.util.Collection;
-
+import com.boxysystems.jgoogleanalytics.JGoogleAnalyticsTracker;
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 import org.sonatype.nexus.plugins.ga.GATrackerCache;
@@ -14,7 +13,7 @@ import org.sonatype.nexus.proxy.events.EventInspector;
 import org.sonatype.nexus.proxy.events.RepositoryItemEventRetrieve;
 import org.sonatype.plexus.appevents.Event;
 
-import com.boxysystems.jgoogleanalytics.JGoogleAnalyticsTracker;
+import java.util.Collection;
 
 @Component( role = EventInspector.class, hint = "GAEventInspector" )
 public class GAEventInspector
