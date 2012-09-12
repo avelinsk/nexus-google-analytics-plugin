@@ -21,6 +21,7 @@
 
   <properties>
     <nexus.version>1.9.2.4</nexus.version>
+    <nexus.ga.trackerId>UA-30755831-3</nexus.ga.trackerId>
   </properties>
 
   <dependencies>
