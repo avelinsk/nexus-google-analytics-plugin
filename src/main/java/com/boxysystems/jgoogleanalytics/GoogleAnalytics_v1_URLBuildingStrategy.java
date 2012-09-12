@@ -14,7 +14,7 @@ import java.util.*;
 public class GoogleAnalytics_v1_URLBuildingStrategy implements URLBuildingStrategy {
   private FocusPoint appFocusPoint;
   private String googleAnalyticsTrackingCode;
-  private String refererURL = "http://www.BoxySystems.com";
+  private String refererURL = "http://www.CoreMedia.com";
 
   private static final String TRACKING_URL_Prefix = "http://www.google-analytics.com/__utm.gif";
 
