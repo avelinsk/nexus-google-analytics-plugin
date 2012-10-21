@@ -18,7 +18,7 @@ import javax.inject.Named;
 /**
  * This processor reacts on repository "read" actions and track
  * those in Google analytics. There's only two things to configure,
- * the google tracker code (mandatory) and an optional referrer URL; thes
+ * the google tracker code (mandatory) and an optional referrer URL; the
  * two are set via system properties:
  * <p/>
  * <pre>
@@ -97,10 +97,7 @@ public class GaTrackerRequestProcessor implements RequestProcessor {
   }
 
   private boolean checkGaTrackerId() {
-    if (GA_TRACKER_ID == null) {
-      return false;
-    }
-    return true;
+    return GA_TRACKER_ID != null;
   }
 
 
