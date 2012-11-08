@@ -20,7 +20,8 @@
   <description>Nexus plugin providing Google Analytics services to Nexus.</description>
 
   <properties>
-    <nexus.version>1.9.2.4</nexus.version>
+    <nexus.version>2.2</nexus.version>
+    <nexus.ga.trackerId>UA-30755831-3</nexus.ga.trackerId>
   </properties>
 
   <dependencies>
@@ -51,7 +52,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.2</version>
+      <version>4.10</version>
       <scope>test</scope>
     </dependency>
     <dependency>
