@@ -14,15 +14,17 @@ import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.proxy.repository.RequestProcessor;
 
 import javax.inject.Named;
+import java.io.IOException;
+import java.util.Properties;
 
 /**
  * This processor reacts on repository "read" actions and track
  * those in Google analytics. There's only two things to configure,
  * the google tracker code (mandatory) and an optional referrer URL; the
- * two are set via system properties:
+ * trackerId is read from the pom.xml, for example:
  * <p/>
  * <pre>
- *     -Dnexus.ga.trackerId=UA-30755831-3
+ *     &lt;nexus.ga.trackerId&gt;UA-30755831-3&lt;/nexus.ga.trackerId&gt;
  * </pre>
  *
  * @author Lars J. Nilsson
@@ -31,7 +33,17 @@ import javax.inject.Named;
 @Named("gaTracker")
 public class GaTrackerRequestProcessor implements RequestProcessor {
 
-  public static final String GA_TRACKER_ID = System.getProperty("nexus.ga.trackerId");
+  static {
+    Properties props = new Properties();
+    try {
+      props.load(GaTrackerRequestProcessor.class.getResourceAsStream("/nexus-ga-plugin.properties"));
+    } catch (IOException e) {
+      // do nothing
+    }
+    GA_TRACKER_ID = props.getProperty("trackerId");
+  }
+
+  public static String GA_TRACKER_ID;
 
   private final Logger log = LoggerFactory.getLogger(getClass());
   private final JGoogleAnalyticsTracker tracker;
@@ -39,10 +51,11 @@ public class GaTrackerRequestProcessor implements RequestProcessor {
   public GaTrackerRequestProcessor() {
     if (checkGaTrackerId()) {
       log.info("Creating new tracker, with id: " + GA_TRACKER_ID);
-      tracker = new JGoogleAnalyticsTracker("Nexus", "1.9.2.2", GA_TRACKER_ID);
+      tracker = new JGoogleAnalyticsTracker("Nexus", "2.2", GA_TRACKER_ID);
       adaptLogging();
     } else {
-      tracker = new JGoogleAnalyticsTracker("Nexus", "1.9.2.2", "");
+      log.warn("Google Analytics tracking is disabled.");
+      tracker = new JGoogleAnalyticsTracker("Nexus", "2.2", "");
     }
   }
 
@@ -97,9 +110,8 @@ public class GaTrackerRequestProcessor implements RequestProcessor {
   }
 
   private boolean checkGaTrackerId() {
-    return GA_TRACKER_ID != null;
+    return GA_TRACKER_ID != null && !GA_TRACKER_ID.equals("");
   }
-
 
   // --- INNER CLASSES --- //
 
