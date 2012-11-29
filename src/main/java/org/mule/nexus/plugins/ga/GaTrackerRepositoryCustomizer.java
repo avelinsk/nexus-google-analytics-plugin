@@ -11,8 +11,7 @@ import org.sonatype.nexus.proxy.repository.RequestProcessor;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Small customizer, which only adds the GA tracker to the repositories.
@@ -25,19 +24,18 @@ import java.util.HashSet;
  */
 public class GaTrackerRepositoryCustomizer implements RepositoryCustomizer {
 
-  private final Logger log = LoggerFactory.getLogger(getClass());
+  {
+    PropertiesLoader.loadProperties();
+  }
 
-  /**
-   * The list of repositories to be tracked by GA.
-   */
-  private static final HashSet<String> REPOSITORIES = new HashSet<String> (Arrays.asList("releases", "snapshots"));
+  private final Logger log = LoggerFactory.getLogger(getClass());
 
   @Inject
   @Named("gaTracker")
   private RequestProcessor gaTracker;
 
   public void configureRepository(Repository rep) throws ConfigurationException {
-    for (String s : REPOSITORIES) {
+    for (String s : PropertiesLoader.REPOSITORIES) {
       if (s.equalsIgnoreCase(rep.getId())) {
         log.debug("Attaching tracker to: " + rep.getName());
         rep.getRequestProcessors().put("gaTracker", gaTracker);

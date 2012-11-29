@@ -25,3 +25,12 @@ A lot of thanks goes to Lars J. Nilsson for a great inspiration!
 
 Have fun!  
 ~t~
+
+CoreMedia
+=========
+
+To update the Google Analytics trackerId or the list of the tracked repositories, change the corresponding properties in the pom.xml:
+
+* <nexus.ga.trackerId>UA-30755831-3</nexus.ga.trackerId>
+* <trackedRepositories>snapshots,releases</trackedRepositories>
+

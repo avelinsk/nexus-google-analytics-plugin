@@ -22,6 +22,7 @@
   <properties>
     <nexus.version>2.2</nexus.version>
     <nexus.ga.trackerId>UA-30755831-3</nexus.ga.trackerId>
+    <trackedRepositories>releases</trackedRepositories>
   </properties>
 
   <dependencies>

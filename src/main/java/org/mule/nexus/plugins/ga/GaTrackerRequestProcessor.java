@@ -33,25 +33,17 @@ import java.util.Properties;
 @Named("gaTracker")
 public class GaTrackerRequestProcessor implements RequestProcessor {
 
-  static {
-    Properties props = new Properties();
-    try {
-      props.load(GaTrackerRequestProcessor.class.getResourceAsStream("/nexus-ga-plugin.properties"));
-    } catch (IOException e) {
-      // do nothing
-    }
-    GA_TRACKER_ID = props.getProperty("trackerId");
+  {
+    PropertiesLoader.loadProperties();
   }
-
-  public static String GA_TRACKER_ID;
 
   private final Logger log = LoggerFactory.getLogger(getClass());
   private final JGoogleAnalyticsTracker tracker;
 
   public GaTrackerRequestProcessor() {
     if (checkGaTrackerId()) {
-      log.info("Creating new tracker, with id: " + GA_TRACKER_ID);
-      tracker = new JGoogleAnalyticsTracker("Nexus", "2.2", GA_TRACKER_ID);
+      log.info("Creating new Google Analytics tracker with id: " + PropertiesLoader.GA_TRACKER_ID);
+      tracker = new JGoogleAnalyticsTracker("Nexus", "2.2", PropertiesLoader.GA_TRACKER_ID);
       adaptLogging();
     } else {
       log.warn("Google Analytics tracking is disabled.");
@@ -110,7 +102,7 @@ public class GaTrackerRequestProcessor implements RequestProcessor {
   }
 
   private boolean checkGaTrackerId() {
-    return GA_TRACKER_ID != null && !GA_TRACKER_ID.equals("");
+    return PropertiesLoader.GA_TRACKER_ID != null && !PropertiesLoader.GA_TRACKER_ID.equals("");
   }
 
   // --- INNER CLASSES --- //
