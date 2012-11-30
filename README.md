@@ -31,6 +31,6 @@ CoreMedia
 
 To update the Google Analytics trackerId or the list of the tracked repositories, change the corresponding properties in the pom.xml:
 
-* <nexus.ga.trackerId>UA-30755831-3</nexus.ga.trackerId>
-* <trackedRepositories>snapshots,releases</trackedRepositories>
+* &lt;nexus.ga.trackerId&gt;UA-XXXXXX-X&lt;/nexus.ga.trackerId&gt;
+* &lt;trackedRepositories&gt;snapshots,releases&lt;/trackedRepositories&gt;
 
