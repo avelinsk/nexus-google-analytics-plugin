@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.nexus.plugins.RepositoryCustomizer;
-import org.sonatype.nexus.proxy.repository.HostedRepository;
 import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.proxy.repository.RequestProcessor;
 
@@ -37,15 +36,15 @@ public class GaTrackerRepositoryCustomizer implements RepositoryCustomizer {
   public void configureRepository(Repository rep) throws ConfigurationException {
     for (String s : PropertiesLoader.REPOSITORIES) {
       if (s.equalsIgnoreCase(rep.getId())) {
-        log.debug("Attaching tracker to: " + rep.getName());
+        log.info("Attaching Google Analytics tracker to: " + rep.getName());
         rep.getRequestProcessors().put("gaTracker", gaTracker);
       }
     }
   }
 
   public boolean isHandledRepository(Repository rep) {
-    boolean b = rep.getRepositoryKind().isFacetAvailable(HostedRepository.class);
-    log.info("Handles repository '" + rep.getName() + "': " + b);
-    return b;
+    boolean handlesRepository = PropertiesLoader.REPOSITORIES.contains(rep.getId());
+    log.info("Handles repository '" + rep.getName() + "': " + handlesRepository);
+    return handlesRepository;
   }
 }
