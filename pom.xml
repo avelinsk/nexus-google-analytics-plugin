@@ -18,12 +18,18 @@
 
   <name>Nexus Google Analytics Plugin</name>
   <description>Nexus plugin providing Google Analytics services to Nexus.</description>
+  <url>https://github.com/avelinsk/nexus-google-analytics-plugin/</url>
 
   <properties>
     <nexus.version>2.2</nexus.version>
     <nexus.ga.trackerId>UA-30755831-3</nexus.ga.trackerId>
-    <trackedRepositories>releases</trackedRepositories>
+    <trackedRepositories>releases,thirdparty</trackedRepositories>
   </properties>
+
+  <scm>
+    <connection>git@github.com:avelinsk/nexus-google-analytics-plugin.git</connection>
+    <developerConnection>git@github.com:avelinsk/nexus-google-analytics-plugin.git</developerConnection>
+  </scm>
 
   <dependencies>
 
