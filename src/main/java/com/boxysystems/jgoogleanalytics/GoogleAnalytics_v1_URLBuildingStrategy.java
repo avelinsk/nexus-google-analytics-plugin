@@ -14,12 +14,13 @@ import java.util.*;
 public class GoogleAnalytics_v1_URLBuildingStrategy implements URLBuildingStrategy {
   private FocusPoint appFocusPoint;
   private String googleAnalyticsTrackingCode;
-  private String refererURL = "http://www.CoreMedia.com";
+  private String refererURL = "https://repository.coremedia.com";
 
   private static final String TRACKING_URL_Prefix = "http://www.google-analytics.com/__utm.gif";
 
   private static final Random random = new Random();
   private static String hostName = "localhost";
+  private String userName;
 
   static {
     try {
@@ -35,9 +36,10 @@ public class GoogleAnalytics_v1_URLBuildingStrategy implements URLBuildingStrate
     this.appFocusPoint = new FocusPoint(appName);
   }
 
-  public GoogleAnalytics_v1_URLBuildingStrategy(String appName, String appVersion, String googleAnalyticsTrackingCode) {
+  public GoogleAnalytics_v1_URLBuildingStrategy(String appName, String appVersion, String googleAnalyticsTrackingCode, String userName) {
     this.googleAnalyticsTrackingCode = googleAnalyticsTrackingCode;
     this.appFocusPoint = new FocusPoint(appVersion, new FocusPoint(appName));
+    this.userName = userName;
   }
 
 
@@ -65,6 +67,7 @@ public class GoogleAnalytics_v1_URLBuildingStrategy implements URLBuildingStrate
     url.append("&utmcr=1"); //carriage return
     url.append("&utmdt=" + focusPoint.getContentTitle()); //The optimum keyword density //document title
     url.append("&utmhn=" + hostName);//document hostname
+    url.append("&utme=8(User%20Name)9(" + userName + ")11(1)");  // 8-custom var name; 9-custom var value; 11-custom var scope (1-visitor, 2-session, 3-page-level)
     url.append("&utmr="+refererURL); //referer URL
     url.append("&utmp=" + focusPoint.getContentURI());//document page URL
     url.append("&utmac=" + googleAnalyticsTrackingCode);//Google Analytics account

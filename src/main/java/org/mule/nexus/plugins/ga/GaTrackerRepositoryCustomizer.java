@@ -23,7 +23,7 @@ import java.util.Set;
  */
 public class GaTrackerRepositoryCustomizer implements RepositoryCustomizer {
 
-  {
+  static {
     PropertiesLoader.loadProperties();
   }
 

@@ -33,21 +33,22 @@ import java.util.Properties;
 @Named("gaTracker")
 public class GaTrackerRequestProcessor implements RequestProcessor {
 
-  {
+  static {
     PropertiesLoader.loadProperties();
   }
 
   private final Logger log = LoggerFactory.getLogger(getClass());
   private final JGoogleAnalyticsTracker tracker;
+  private String userName = "CoreMedia";
 
   public GaTrackerRequestProcessor() {
     if (checkGaTrackerId()) {
       log.info("Creating new Google Analytics tracker with id: " + PropertiesLoader.GA_TRACKER_ID);
-      tracker = new JGoogleAnalyticsTracker("Nexus", "2.2", PropertiesLoader.GA_TRACKER_ID);
+      tracker = new JGoogleAnalyticsTracker("Nexus", "2.2", PropertiesLoader.GA_TRACKER_ID, userName);
       adaptLogging();
     } else {
       log.warn("Google Analytics tracking is disabled.");
-      tracker = new JGoogleAnalyticsTracker("Nexus", "2.2", "");
+      tracker = new JGoogleAnalyticsTracker("Nexus", "2.2", "", userName);
     }
   }
 

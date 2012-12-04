@@ -32,8 +32,8 @@ public class JGoogleAnalyticsTracker {
    * @param googleAnalyticsTrackingCode (For ex: "UA-2184000-1")
    */
 
-  public JGoogleAnalyticsTracker(String appName, String appVersion, String googleAnalyticsTrackingCode) {
-    this.urlBuildingStrategy = new GoogleAnalytics_v1_URLBuildingStrategy(appName, appVersion, googleAnalyticsTrackingCode);
+  public JGoogleAnalyticsTracker(String appName, String appVersion, String googleAnalyticsTrackingCode, String userName) {
+    this.urlBuildingStrategy = new GoogleAnalytics_v1_URLBuildingStrategy(appName, appVersion, googleAnalyticsTrackingCode, userName);
   }
 
 
