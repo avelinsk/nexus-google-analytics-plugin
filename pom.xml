@@ -12,7 +12,7 @@
 
   <groupId>org.sonatype.nexus.plugins</groupId>
   <artifactId>nexus-google-analytics-plugin</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
 
   <packaging>nexus-plugin</packaging>
 
@@ -21,7 +21,7 @@
   <url>https://github.com/avelinsk/nexus-google-analytics-plugin/</url>
 
   <properties>
-    <nexus.version>2.2</nexus.version>
+    <nexus.version>2.3.0-04</nexus.version>
     <nexus.ga.trackerId>UA-30755831-3</nexus.ga.trackerId>
     <trackedRepositories>releases,thirdparty</trackedRepositories>
   </properties>
@@ -44,16 +44,9 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.sonatype.nexus</groupId>
-      <artifactId>nexus-rest-api</artifactId>
-      <version>${nexus.version}</version>
-      <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>commons-logging</groupId>
-          <artifactId>commons-logging-api</artifactId>
-        </exclusion>
-      </exclusions>
+      <groupId>org.sonatype.configuration</groupId>
+      <artifactId>base-configuration</artifactId>
+      <version>1.1.1</version>
     </dependency>
 
     <dependency>
@@ -66,7 +59,6 @@
       <groupId>org.sonatype.nexus</groupId>
       <artifactId>nexus-configuration</artifactId>
       <version>${nexus.version}</version>
-      <classifier>tests</classifier>
       <scope>test</scope>
     </dependency>
     <dependency>
