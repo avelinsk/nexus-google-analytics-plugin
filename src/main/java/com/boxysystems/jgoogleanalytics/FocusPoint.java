@@ -13,6 +13,7 @@ import java.net.URLEncoder;
 public class FocusPoint {
 
   private String name;
+  private String userName;
   private FocusPoint parentFocusPoint;
   private static final String URI_SEPARATOR = "/";
   private static final String TITLE_SEPARATOR = "-";
@@ -21,14 +22,22 @@ public class FocusPoint {
     this.name = name;
   }
 
+  public FocusPoint(String name, String username) {
+    this.name = name;
+    this.userName = username;
+  }
+
   public FocusPoint(String name, FocusPoint parentFocusPoint) {
     this(name);
-    this.parentFocusPoint = parentFocusPoint;
     this.parentFocusPoint = parentFocusPoint;
   }
 
   public String getName() {
     return name;
+  }
+
+  public String getUserName() {
+    return userName;
   }
 
 

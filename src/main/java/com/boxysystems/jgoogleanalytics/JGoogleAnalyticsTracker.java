@@ -32,8 +32,8 @@ public class JGoogleAnalyticsTracker {
    * @param googleAnalyticsTrackingCode (For ex: "UA-2184000-1")
    */
 
-  public JGoogleAnalyticsTracker(String appName, String appVersion, String googleAnalyticsTrackingCode, String userName) {
-    this.urlBuildingStrategy = new GoogleAnalytics_v1_URLBuildingStrategy(appName, appVersion, googleAnalyticsTrackingCode, userName);
+  public JGoogleAnalyticsTracker(String appName, String appVersion, String googleAnalyticsTrackingCode) {
+    this.urlBuildingStrategy = new GoogleAnalytics_v1_URLBuildingStrategy(appName, appVersion, googleAnalyticsTrackingCode);
   }
 
 
@@ -64,8 +64,6 @@ public class JGoogleAnalyticsTracker {
    *
    * @param focusPoint Focus point of the application like application load, application module load, user actions, error events etc.
    */
-
-
   public void trackSynchronously(FocusPoint focusPoint) {
     logMessage("JGoogleAnaytics: Tracking synchronously focusPoint=" + focusPoint.getContentTitle());
     httpRequest.request(urlBuildingStrategy.buildURL(focusPoint));
@@ -76,10 +74,10 @@ public class JGoogleAnalyticsTracker {
    *
    * @param focusPoint Focus point of the application like application load, application module load, user actions, error events etc.
    */
-
   public void trackAsynchronously(FocusPoint focusPoint) {
     logMessage("JGoogleAnaytics: Tracking Asynchronously focusPoint=" + focusPoint.getContentTitle());
-    new TrackingThread(focusPoint).start();
+    TrackingThread trackingThread = new TrackingThread(focusPoint);
+    trackingThread.start();
   }
 
   private void logMessage(String message) {
@@ -95,9 +93,11 @@ public class JGoogleAnalyticsTracker {
     public TrackingThread(FocusPoint focusPoint) {
       this.focusPoint = focusPoint;
       this.setPriority(Thread.MIN_PRIORITY);
+      this.setName("GoogleAnalyticsTrackerThread");
     }
 
     public void run() {
+      // TODO: get exit code, finally stop thread ??? see Hc4ProviderImpl#finalize()
       httpRequest.request(urlBuildingStrategy.buildURL(focusPoint));
     }
   }

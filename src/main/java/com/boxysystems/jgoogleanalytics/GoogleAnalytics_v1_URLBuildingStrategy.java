@@ -20,7 +20,6 @@ public class GoogleAnalytics_v1_URLBuildingStrategy implements URLBuildingStrate
 
   private static final Random random = new Random();
   private static String hostName = "localhost";
-  private String userName;
 
   static {
     try {
@@ -36,10 +35,9 @@ public class GoogleAnalytics_v1_URLBuildingStrategy implements URLBuildingStrate
     this.appFocusPoint = new FocusPoint(appName);
   }
 
-  public GoogleAnalytics_v1_URLBuildingStrategy(String appName, String appVersion, String googleAnalyticsTrackingCode, String userName) {
+  public GoogleAnalytics_v1_URLBuildingStrategy(String appName, String appVersion, String googleAnalyticsTrackingCode) {
     this.googleAnalyticsTrackingCode = googleAnalyticsTrackingCode;
     this.appFocusPoint = new FocusPoint(appVersion, new FocusPoint(appName));
-    this.userName = userName;
   }
 
 
@@ -61,13 +59,14 @@ public class GoogleAnalytics_v1_URLBuildingStrategy implements URLBuildingStrate
     url.append("&utmcs=UTF-8"); //document encoding
     url.append("&utmsr=1440x900"); //screen resolution
     url.append("&utmsc=32-bit"); //color depth
+    // TODO: check user lanugage
     url.append("&utmul=en-us"); //user language
     url.append("&utmje=1"); //java enabled
     url.append("&utmfl=9.0%20%20r28"); //flash
     url.append("&utmcr=1"); //carriage return
     url.append("&utmdt=" + focusPoint.getContentTitle()); //The optimum keyword density //document title
     url.append("&utmhn=" + hostName);//document hostname
-    url.append("&utme=8(User%20Name)9(" + userName + ")11(1)");  // 8-custom var name; 9-custom var value; 11-custom var scope (1-visitor, 2-session, 3-page-level)
+    url.append("&utme=8(User%20Name)9(" + focusPoint.getUserName() + ")11(1)");  // 8-custom var name; 9-custom var value; 11-custom var scope (1-visitor, 2-session, 3-page-level)
     url.append("&utmr="+refererURL); //referer URL
     url.append("&utmp=" + focusPoint.getContentURI());//document page URL
     url.append("&utmac=" + googleAnalyticsTrackingCode);//Google Analytics account

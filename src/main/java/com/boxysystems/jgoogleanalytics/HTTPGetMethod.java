@@ -10,7 +10,6 @@ import java.net.URL;
  * @author : Siddique Hameed
  * @version : 0.1
  */
-
 public class HTTPGetMethod {
   private static final String GET_METHOD_NAME = "GET";
   private static final String SUCCESS_MESSAGE = "JGoogleAnalytics: Tracking Successfull!";
@@ -21,6 +20,7 @@ public class HTTPGetMethod {
     this.loggingAdapter = loggingAdapter;
   }
 
+  // TODO: return exit code ?
   public void request(String urlString) {
     try {
       URL url = new URL(urlString);
