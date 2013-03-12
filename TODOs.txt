@@ -1,4 +1,4 @@
--> stop the tracking threads, as for each GaTrackerRequestProcessor#process() a new TrackingThread is started. May cause a memory leak (see Hc4ProviderImpl#finalize())
+-> stop the tracking threads, as for each GaTrackerRequestProcessor#process() a new TrackingThread is started. ?? May cause a memory leak (see Hc4ProviderImpl#finalize())
 
 -> when I access nexus pro through a proxy, nexus uses org.sonatype.nexus.apachehttpclient.Hc4ProviderImpl#configureAuthentication()
 
@@ -8,7 +8,6 @@
 
 -> send user statistics (username) along with the downloaded artifact's path (OS Java Version, however only from the Nexus Proxy host)
 
--> GoogleAnalytics_v1_URLBuildingStrategy#buildURL tracks only the first GUI access ???
 
 
 
