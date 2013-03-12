@@ -20,15 +20,15 @@ public class HTTPGetMethod {
     this.loggingAdapter = loggingAdapter;
   }
 
-  // TODO: return exit code ?
-  public void request(String urlString) {
+  public int request(String urlString) {
+    int responseCode = -1;
     try {
       URL url = new URL(urlString);
       HttpURLConnection urlConnection = openURLConnection(url);
       urlConnection.setInstanceFollowRedirects(true);
       urlConnection.setRequestMethod(GET_METHOD_NAME);
       urlConnection.connect();
-      int responseCode = getResponseCode(urlConnection);
+      responseCode = getResponseCode(urlConnection);
       if (responseCode != HttpURLConnection.HTTP_OK) {
         logError("JGoogleAnalytics: Error tracking, url=" + urlString);
       } else {
@@ -37,6 +37,7 @@ public class HTTPGetMethod {
     } catch (Exception e) {
       logError(e.getMessage());
     }
+    return responseCode;
   }
 
   protected int getResponseCode(HttpURLConnection urlConnection) throws IOException {

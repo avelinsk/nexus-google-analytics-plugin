@@ -97,7 +97,7 @@ public class JGoogleAnalyticsTracker {
     }
 
     public void run() {
-      // TODO: get exit code, finally stop thread ??? see Hc4ProviderImpl#finalize()
+      // TODO: make use of the exit code
       httpRequest.request(urlBuildingStrategy.buildURL(focusPoint));
     }
   }
