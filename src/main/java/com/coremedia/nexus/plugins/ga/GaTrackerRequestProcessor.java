@@ -4,6 +4,8 @@ package com.coremedia.nexus.plugins.ga;
 import com.boxysystems.jgoogleanalytics.FocusPoint;
 import com.boxysystems.jgoogleanalytics.JGoogleAnalyticsTracker;
 import com.boxysystems.jgoogleanalytics.LoggingAdapter;
+import org.apache.shiro.subject.Subject;
+import org.codehaus.plexus.component.annotations.Requirement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonatype.nexus.proxy.AccessDeniedException;
@@ -17,6 +19,7 @@ import org.sonatype.nexus.proxy.item.StorageItem;
 import org.sonatype.nexus.proxy.repository.ProxyRepository;
 import org.sonatype.nexus.proxy.repository.Repository;
 import org.sonatype.nexus.proxy.repository.RequestProcessor;
+import org.sonatype.security.SecuritySystem;
 
 import javax.inject.Named;
 
@@ -36,6 +39,9 @@ import javax.inject.Named;
 @Named("gaTracker")
 public class GaTrackerRequestProcessor implements RequestProcessor {
 
+  @Requirement
+  private SecuritySystem securitySystem;
+
   private final JGoogleAnalyticsTracker tracker;
   private static final String REQUEST_USER = "request.user";
   private static final String REQUEST_AGENT = "request.agent";
@@ -51,16 +57,23 @@ public class GaTrackerRequestProcessor implements RequestProcessor {
   }
 
   public boolean process(Repository rep, ResourceStoreRequest req, Action action) {
-    String userName = "";
-    RequestContext requestContext = req.getRequestContext();
+    String userName = "anonymous";
 
-    //TODO: remove for loop and logging when fixed
+/*  RequestContext requestContext = req.getRequestContext();
     LOG.info("Request Context: \n");
     for (String s : requestContext.keySet()) {
-      LOG.info("key=" + s  + "   value=" + requestContext.get(s));
+      LOG.info("key = " + s  + "   value =" + requestContext.get(s));
     }
-
     userName = requestContext.containsKey(REQUEST_USER) ? (String) requestContext.get(REQUEST_USER) : DEFAULT_USERNAME;
+*/
+    if (securitySystem != null) {
+      final Subject subject = securitySystem.getSubject();
+      if (subject != null) {
+        LOG.debug("All Principals: " + subject.getPrincipals().toString());
+        LOG.debug("Current Principal: " + subject.getPrincipal().toString());
+        userName = subject.getPrincipal().toString();
+      }
+    }
 
     if (action == Action.read) {
       /*

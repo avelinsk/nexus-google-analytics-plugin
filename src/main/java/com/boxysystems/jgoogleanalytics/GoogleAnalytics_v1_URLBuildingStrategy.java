@@ -71,6 +71,7 @@ public class GoogleAnalytics_v1_URLBuildingStrategy implements URLBuildingStrate
     url.append("&utmp=" + focusPoint.getContentURI());//document page URL
     url.append("&utmac=" + googleAnalyticsTrackingCode);//Google Analytics account
     url.append("&utmcc=__utma%3D'"+cookie+"."+randomValue+"."+now+"."+now+"."+now+".2%3B%2B__utmb%3D"+cookie+"%3B%2B__utmc%3D"+cookie+"%3B%2B__utmz%3D"+cookie+"."+now+".2.2.utmccn%3D(direct)%7Cutmcsr%3D(direct)%7Cutmcmd%3D(none)%3B%2B__utmv%3D"+cookie);
+//    System.out.println(url.toString());
     return url.toString();
   }
 
