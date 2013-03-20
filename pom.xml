@@ -23,7 +23,7 @@
   <properties>
     <nexus.version>2.3.0-04</nexus.version>
     <nexus.ga.trackerId>UA-30755831-3</nexus.ga.trackerId>
-    <trackedRepositories>releases,thirdparty</trackedRepositories>
+    <trackedRepositories>cms-releases</trackedRepositories>
   </properties>
 
   <scm>
