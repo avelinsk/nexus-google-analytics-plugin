@@ -12,13 +12,28 @@
 
   <groupId>org.sonatype.nexus.plugins</groupId>
   <artifactId>nexus-google-analytics-plugin</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.0-SNAPSHOT</version>
 
   <packaging>nexus-plugin</packaging>
 
   <name>Nexus Google Analytics Plugin</name>
   <description>Nexus plugin providing Google Analytics services to Nexus.</description>
   <url>https://github.com/avelinsk/nexus-google-analytics-plugin/</url>
+
+  <distributionManagement>
+    <site>
+      <id>localfs</id>
+      <url>file://${project.basedir}/target</url>
+    </site>
+    <snapshotRepository>
+      <id>localfs</id>
+      <url>file://${project.basedir}/target</url>
+    </snapshotRepository>
+    <repository>
+      <id>localfs</id>
+      <url>file://${project.basedir}/target</url>
+    </repository>
+  </distributionManagement>
 
   <properties>
     <nexus.version>2.3.0-04</nexus.version>
