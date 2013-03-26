@@ -42,8 +42,9 @@
   </properties>
 
   <scm>
-    <connection>git@github.com:avelinsk/nexus-google-analytics-plugin.git</connection>
-    <developerConnection>git@github.com:avelinsk/nexus-google-analytics-plugin.git</developerConnection>
+    <connection>scm:git:git@github.com:avelinsk/nexus-google-analytics-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:avelinsk/nexus-google-analytics-plugin.git</developerConnection>
+    <tag>HEAD</tag>
   </scm>
 
   <dependencies>
