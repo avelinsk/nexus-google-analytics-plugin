@@ -193,7 +193,6 @@
           <skip>true</skip>
         </configuration>
       </plugin>
-      </plugin>
     </plugins>
 
     <pluginManagement>
