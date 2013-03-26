@@ -11,7 +11,7 @@
 
   <groupId>org.sonatype.nexus.plugins</groupId>
   <artifactId>nexus-google-analytics-plugin</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
 
   <packaging>nexus-plugin</packaging>
 
@@ -43,7 +43,7 @@
   <scm>
     <connection>scm:git:git@github.com:avelinsk/nexus-google-analytics-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:avelinsk/nexus-google-analytics-plugin.git</developerConnection>
-    <tag>nexus-google-analytics-plugin-1.0.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <dependencies>
