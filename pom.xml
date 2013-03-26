@@ -185,6 +185,15 @@
         <artifactId>app-lifecycle-maven-plugin</artifactId>
         <extensions>true</extensions>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+      </plugin>
     </plugins>
 
     <pluginManagement>
