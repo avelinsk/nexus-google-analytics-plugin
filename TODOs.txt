@@ -1,10 +1,5 @@
--> when I access nexus pro through a proxy, nexus uses org.sonatype.nexus.apachehttpclient.Hc4ProviderImpl#configureAuthentication()
-
--> test with scripts that run nightly downloading artifacts from repo-testing.coremedia.com per Nexus Rest API
 
 -> test if plugin tracks a repository if it is in a group
-
--> send user statistics (username) along with the downloaded artifact's path (OS Java Version, however only from the Nexus Proxy host)
 
 -> ADD UNIT TESTS WITH MOCKITO :-)
 
@@ -13,3 +8,5 @@
 -> fix the regex to exclude *.sha and *.sha1 and *.md5 (!)
 
 -> check how to prepare reports to aggregate info for a single user with all downloaded artifacts
+
+-> new tracker id before going live ?
