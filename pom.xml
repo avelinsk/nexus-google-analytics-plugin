@@ -36,6 +36,7 @@
 
   <properties>
     <nexus.version>2.3.0-04</nexus.version>
+    <logback.version>1.0.7</logback.version>
     <nexus.ga.trackerId>UA-30755831-3</nexus.ga.trackerId>
     <trackedRepositories>cms-releases</trackedRepositories>
   </properties>
@@ -132,6 +133,17 @@
       <artifactId>plexus-component-annotations</artifactId>
       <version>1.5.5</version>
       <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
     </dependency>
 
   </dependencies>
