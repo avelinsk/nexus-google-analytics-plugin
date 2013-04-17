@@ -17,6 +17,9 @@
 <!-- always a good activate OnConsoleStatusListener -->
 <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
 
+    <conversionRule conversionWord="username"
+                    converterClass="com.coremedia.nexus.plugins.LoggingConverter" />
+
 <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
   <file>logs/nexus-ga.log</file>
   <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -24,7 +27,7 @@
   </rollingPolicy>
 
   <encoder>
-    <pattern>combined</pattern>
+    <pattern>%h %l %-5username [%t] "%r" %s %b "%i{Referer}" "%i{User-Agent}"</pattern>
     <!--<pattern>%date %h %u "%i{Referer}" "%i{User-Agent}"</pattern>-->
   </encoder>
 </appender>
