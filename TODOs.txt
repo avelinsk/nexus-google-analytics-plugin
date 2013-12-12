@@ -1,3 +1,4 @@
+-> update to nexus 2.7.0-05
 
 -> test if plugin tracks a repository if it is in a group
 
