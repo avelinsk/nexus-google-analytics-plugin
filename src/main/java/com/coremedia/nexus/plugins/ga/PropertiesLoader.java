@@ -40,7 +40,7 @@ class PropertiesLoader {
 
     String repositoriesLocal = props.getProperty("trackedRepositories");
     REPOSITORIES = (repositoriesLocal != null && !repositoriesLocal.equals(""))
-            ? new HashSet<String>(Arrays.asList(repositoriesLocal.split(",")))
+            ? new HashSet<>(Arrays.asList(repositoriesLocal.split(",")))
             : Collections.<String>emptySet();
 
     String trackerId = props.getProperty("trackerId");

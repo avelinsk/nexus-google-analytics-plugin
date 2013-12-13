@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.sonatype.configuration.ConfigurationException;
 import org.sonatype.nexus.plugins.RepositoryCustomizer;
 import org.sonatype.nexus.proxy.repository.Repository;
-import org.sonatype.nexus.proxy.repository.RequestProcessor;
+import org.sonatype.nexus.proxy.repository.RequestStrategy;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,13 +28,13 @@ public class GaTrackerRepositoryCustomizer implements RepositoryCustomizer {
 
   @Inject
   @Named("gaTracker")
-  private RequestProcessor gaTracker;
+  private RequestStrategy gaTracker;
 
   public void configureRepository(Repository rep) throws ConfigurationException {
     for (String s : PropertiesLoader.REPOSITORIES) {
       if (s.equalsIgnoreCase(rep.getId())) {
         LOG.info("Attaching Google Analytics tracker to: " + rep.getName());
-        rep.getRequestProcessors().put("gaTracker", gaTracker);
+        rep.registerRequestStrategy("gaTracker", gaTracker);
       }
     }
   }

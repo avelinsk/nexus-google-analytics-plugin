@@ -4,9 +4,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.sonatype.forge</groupId>
-    <artifactId>forge-parent</artifactId>
-    <version>30</version>
+    <groupId>org.sonatype.nexus.plugins</groupId>
+    <artifactId>nexus-plugins</artifactId>
+    <version>2.7.0-05</version>
   </parent>
 
   <groupId>org.sonatype.nexus.plugins</groupId>
@@ -35,8 +35,13 @@
   </distributionManagement>
 
   <properties>
-    <nexus.version>2.3.0-04</nexus.version>
-    <logback.version>1.0.7</logback.version>
+    <nexus.version>2.7.0-05</nexus.version>
+    <logback.version>1.0.13</logback.version>
+    <junit.version>4.11</junit.version>
+    <security-system.version>3.3</security-system.version>
+    <shiro.core.version>1.2.2</shiro.core.version>
+    <slf4j.version>1.7.5</slf4j.version>
+    <plexus.version>1.5.5</plexus.version>
     <nexus.ga.trackerId>UA-30755831-3</nexus.ga.trackerId>
     <trackedRepositories>cms-releases</trackedRepositories>
   </properties>
@@ -50,46 +55,9 @@
   <dependencies>
 
     <dependency>
-      <groupId>org.sonatype.nexus</groupId>
-      <artifactId>nexus-proxy</artifactId>
-      <version>${nexus.version}</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.sonatype.configuration</groupId>
-      <artifactId>base-configuration</artifactId>
-      <version>1.1.1</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.10</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.sonatype.nexus</groupId>
-      <artifactId>nexus-configuration</artifactId>
-      <version>${nexus.version}</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.sonatype.nexus</groupId>
-      <artifactId>nexus-proxy</artifactId>
-      <version>${nexus.version}</version>
-      <classifier>tests</classifier>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.sonatype.nexus</groupId>
-      <artifactId>nexus-app</artifactId>
-      <version>${nexus.version}</version>
-      <classifier>tests</classifier>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
 
@@ -101,37 +69,30 @@
     </dependency>
 
     <dependency>
-      <groupId>org.sonatype.nexus</groupId>
-      <artifactId>nexus-api</artifactId>
-      <version>${nexus.version}</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.7.2</version>
+      <version>${slf4j.version}</version>
       <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>org.sonatype.security</groupId>
       <artifactId>security-system</artifactId>
-      <version>3.0.1</version>
+      <version>${security-system.version}</version>
       <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>org.apache.shiro</groupId>
       <artifactId>shiro-core</artifactId>
-      <version>1.2.1</version>
+      <version>${shiro.core.version}</version>
       <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>org.codehaus.plexus</groupId>
       <artifactId>plexus-component-annotations</artifactId>
-      <version>1.5.5</version>
+      <version>${plexus.version}</version>
       <scope>provided</scope>
     </dependency>
 
@@ -171,7 +132,14 @@
       <plugin>
         <groupId>org.codehaus.plexus</groupId>
         <artifactId>plexus-component-metadata</artifactId>
-        <version>1.2.1</version>
+        <version>1.5.5</version>
+        <dependencies>
+          <dependency>
+            <groupId>com.thoughtworks.qdox</groupId>
+            <artifactId>qdox</artifactId>
+            <version>1.12</version>
+          </dependency>
+        </dependencies>
         <executions>
           <execution>
             <id>process-classes</id>
